@@ -6,7 +6,7 @@
 /*   By: mqian <mqian@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 17:17:42 by mqian             #+#    #+#             */
-/*   Updated: 2019/04/24 18:16:09 by mqian            ###   ########.fr       */
+/*   Updated: 2019/04/24 19:58:13 by mqian            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 int		ft_printf(const char *format, ...)
 {
 	va_list ap;
+	va_start(ap, format);
+
 
 	return (0);
 }
