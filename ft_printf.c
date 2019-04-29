@@ -12,8 +12,28 @@
 
 #include "ft_printf.h"
 
+int		parse_format(char *format, t_print_struct *print)
+{
+	int i = 0;
+	int count = 0;
+	int len = ft_strlen(format);
+	char *temp;
+
+	while (i < len && format[i])
+	{
+		if (!(temp = ft_strchr(format, '%')))
+			return (count);
+		else:
+			count++;
+
+	}
+}
+
 int		ft_printf(const char *format, ...)
 {
+	t_print_struct *printf_struct;
+
+	printf_struct = initialize_struct(printf_struct);
 	va_list ap;
 	va_start(ap, format);
 
