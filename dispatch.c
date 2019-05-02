@@ -12,21 +12,18 @@
 
 #include "ft_printf.h"
 
-conversion *create_dispatch_table(/* arguments */)
+void init_dispatch_table(conversion *f[])
 {
-	static conversion dispatch[10] = {
-        format_c,
-        format_d,
-        format_f,
-        format_i,
-		format_s,
-		format_o,
-		format_p,
-		format_u,
-		format_x,
-		format_x_upper,
-    };
-    return (dispatch);
+	f[0] = format_c;
+    f[1] = format_d;
+    f[2] = format_f;
+    f[3] = format_i;
+	f[4] = format_o;
+	f[5] = format_p;
+	f[6] = format_s;
+	f[7] = format_u;
+	f[8] = format_x;
+	f[9] = format_x_upper;
 }
 
 int     letter_to_function(char c)
