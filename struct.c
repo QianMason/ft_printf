@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   struct.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: Thunderpurtz <Thunderpurtz@student.42.f    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/05/05 14:22:16 by Thunderpurt       #+#    #+#             */
+/*   Updated: 2019/05/05 14:22:18 by Thunderpurt      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 t_print_struct *init_struct(t_print_struct *p, char *format, va_list args)

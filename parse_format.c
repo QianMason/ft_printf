@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_format.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mqian <mqian@student.42.fr>                +#+  +:+       +#+        */
+/*   By: Thunderpurtz <Thunderpurtz@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/02 16:57:21 by mqian             #+#    #+#             */
-/*   Updated: 2019/05/02 19:56:58 by mqian            ###   ########.fr       */
+/*   Updated: 2019/05/22 16:46:07 by Thunderpurt      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,48 @@
 
 void	parse_flags(t_print_struct *print, char *format)
 {
-
-	//loop through
+	while (*format)
+	{
+		if (*format == '+')
+			print->flags[0] = 1;
+		else if (*format == '-')
+			print->flags[1] = 1;
+		else if (*format == '#')
+			print->flags[2] = 1;
+		else if (*format == '0')
+			print->flags[3] = 1;
+		else if (*format == ' ')
+			print->flags[4] = 1;
+		//else if (*format == minw) how to tell it is equal to minw
+			//print->flags[5] = 1;
+		else if (*format == '.') //dot precision
+			print->flags[6] = 1;
+		else if (*format == 'h' || *format == 'l')
+		{
+			if (*format == 'h')
+			{
+				if ((*(format + 1)) == 'h') // then hh
+					print->flags[7] = 1;
+				else
+					print->flags[7] = 2;
+			}
+			else
+			{
+				if ((*(format + 1)) == 'l')
+					print->flags[7] = 4;
+				else
+					print->flags[7] = 3;
+			}
+		}
+		else if (is_conversion(format))
+		{
+			print->flags[8] = (int)(*format); //ascii value
+			return;
+		}
+		else if (*format == '%')
+			return ;
+		format++;
+	}
 }
 
 void		parse_format(t_print_struct *print, char *format, va_list args, int count)
@@ -27,9 +67,9 @@ void		parse_format(t_print_struct *print, char *format, va_list args, int count)
 
 void parse_and_print(t_print_struct *printf_struct, va_list args, int count)
 {
-	while (printf_struct->format)
+	while (*(printf_struct->format))
 	{
-		if (printf_struct->format == '%')
+		if (*(printf_struct->format) == '%')
 		{
 			printf_struct->format++;
 			parse_flags(printf_struct, printf_struct->format);
@@ -42,10 +82,21 @@ void parse_and_print(t_print_struct *printf_struct, va_list args, int count)
 			printf_struct->format++;
 			count++;
 		}
+		(printf_struct->format)++;
 	}
 	return ;
 }
 
+int		is_conversion(char *format)
+{
+	if (*format == 'c' || *format == 'd' || *format == 'f' || *format == 'i'
+		|| *format == 's' || *format == 'o' || *format == 'p' || *format == 'u'
+			|| *format == 'x' || *format == 'X')
+			{
+				return (1);
+			}
+	return (0);
+}
 /*
 ** THIS IS THE CURRENT MAPPING FOR THE FLAG CHECK FLAGS: (created per %)
 **
