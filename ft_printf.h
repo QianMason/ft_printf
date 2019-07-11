@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Thunderpurtz <Thunderpurtz@student.42.f    +#+  +:+       +#+        */
+/*   By: mqian <mqian@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 17:18:53 by mqian             #+#    #+#             */
-/*   Updated: 2019/07/10 17:57:58 by Thunderpurt      ###   ########.fr       */
+/*   Updated: 2019/07/11 14:56:04 by mqian            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ t_print_struct *init_struct(t_print_struct *p, char *format, va_list args);
 int  letter_to_function(char c);
 void parse_and_print(t_print_struct *printf_struct, va_list args, int count);
 t_print_struct *init_struct(t_print_struct *p, char *format, va_list args);
-void	parse_parms(t_print_struct *print, char *format);
-
+void	parse_params(t_print_struct *print, char *format);
+void	print_conversion(t_print_struct *print, char *format, va_list args);
+void	parse_set_flags(t_print_struct *print, char *format);
+void	parse_set_len_mod(t_print_struct *print, char *format);
 #endif
