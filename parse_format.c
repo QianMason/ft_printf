@@ -6,28 +6,19 @@
 /*   By: Thunderpurtz <Thunderpurtz@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/02 16:57:21 by mqian             #+#    #+#             */
-/*   Updated: 2019/05/22 16:46:07 by Thunderpurt      ###   ########.fr       */
+/*   Updated: 2019/07/11 13:14:38 by Thunderpurt      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	parse_flags(t_print_struct *print, char *format)
+void	parse_params(t_print_struct *print, char *format)
 {
 	while (*format)
 	{
-		if (*format == '+')
-			print->flags[0] = 1;
-		else if (*format == '-')
-			print->flags[1] = 1;
-		else if (*format == '#')
-			print->flags[2] = 1;
-		else if (*format == '0')
-			print->flags[3] = 1;
-		else if (*format == ' ')
-			print->flags[4] = 1;
-		//else if (*format == minw) how to tell it is equal to minw
-			//print->flags[5] = 1;
+		parse_set_flags(print, format);
+		if (atoi(*format) > 0)
+			print->flags[5] = atoi(*format);
 		else if (*format == '.') //dot precision
 			print->flags[6] = 1;
 		else if (*format == 'h' || *format == 'l')
@@ -72,7 +63,7 @@ void parse_and_print(t_print_struct *printf_struct, va_list args, int count)
 		if (*(printf_struct->format) == '%')
 		{
 			printf_struct->format++;
-			parse_flags(printf_struct, printf_struct->format);
+			parse_params(printf_struct, printf_struct->format);
 			//parse_format(format);
 			printf_struct->formatters[letter_to_function('s')](va_arg(args, char*));
 		}
@@ -97,6 +88,21 @@ int		is_conversion(char *format)
 			}
 	return (0);
 }
+
+void	parse_set_flags(t_print_struct *print, char *format)
+{
+	if (*format == '+')
+		print->flags[0] = 1;
+	else if (*format == '-')
+		print->flags[1] = 1;
+	else if (*format == '#')
+		print->flags[2] = 1;
+	else if (*format == '0')
+		print->flags[3] = 1;
+	else if (*format == ' ')
+		print->flags[4] = 1;
+}
+
 /*
 ** THIS IS THE CURRENT MAPPING FOR THE FLAG CHECK FLAGS: (created per %)
 **
